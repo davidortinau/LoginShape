@@ -3,8 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LoginShape.MainPage"
-             BackgroundColor="#222222"
+             BackgroundColor="{AppThemeBinding Dark=#222222, Light=#f1f1f1}"
              >
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Dark=#666666, Light=#222222}"/>
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Dark=#666666, Light=#222222}"/>
+            <Setter Property="BackgroundColor"
+                    Value="{AppThemeBinding Dark=#1d1d1d, Light=#F1F1F1}"/>
+        </Style>
+    </ContentPage.Resources>
+
     <Grid ColumnDefinitions="*,279,*"
           RowDefinitions="*,350,*"
           >
@@ -34,7 +48,7 @@
                 Grid.ColumnSpan="4"
                 HorizontalOptions="Fill"
                 VerticalOptions="Fill"
-                Fill="White"
+                Fill="{AppThemeBinding Dark=#333333, Light=#FFFFFF}"
                 Data="M251,0 C266.463973,-2.84068575e-15 279,12.536027 279,28 L279,276 C279,291.463973 266.463973,304 251,304 L214.607,304 L214.629319,304.009394 L202.570739,304.356889 C196.091582,304.5436 190.154631,308.020457 186.821897,313.579883 L186.821897,313.579883 L183.402481,319.283905 C177.100406,337.175023 160.04792,350 140,350 C119.890172,350 102.794306,337.095694 96.5412691,319.115947 L96.5273695,319.126964 L92.8752676,313.28194 C89.5084023,307.893423 83.6708508,304.544546 77.3197008,304.358047 L65.133,304 L28,304 C12.536027,304 1.8937905e-15,291.463973 0,276 L0,28 C-1.8937905e-15,12.536027 12.536027,2.84068575e-15 28,0 L251,0 Z"
                 />
             <Label
@@ -43,7 +57,6 @@
                 HorizontalTextAlignment="Center"
                 FontFamily="DINBold"
                 Text="LOGIN"
-                TextColor="#222222"
                 FontSize="22"/>
             <Label
                 Grid.Row="1"
@@ -51,7 +64,6 @@
                 FontFamily="DINBold"
                 HorizontalTextAlignment="Center"
                 Text="REGISTER" Opacity="0.2"
-                TextColor="#222222"
                 FontSize="22"/>
 
             <Label
@@ -59,7 +71,6 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Text="Username"
-                TextColor="#222222"
                 FontSize="16"/>
             <Entry
                 Grid.Row="3"
@@ -67,8 +78,7 @@
                 Grid.ColumnSpan="2"                
                 Placeholder="Enter username"
                 Text="daortin@microsoft.com"
-                TextColor="#222222"
-                BackgroundColor="#D8D8D8"/>
+                />
 
             <Label
                 Grid.Row="4"
@@ -76,15 +86,13 @@
                 Grid.ColumnSpan="2"
                 Margin="0,4,0,0"
                 Text="Password"
-                TextColor="#222222"
                 FontSize="16"/>
             <Entry
                 Grid.Row="5"
                 Grid.Column="1"
                 Grid.ColumnSpan="2"                
                 Placeholder="Enter password"
-                TextColor="#222222"
-                BackgroundColor="#D8D8D8"/>
+                />
 
             <Grid ColumnDefinitions="64"
                   RowDefinitions="64"
