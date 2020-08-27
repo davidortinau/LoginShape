@@ -8,7 +8,7 @@ namespace LoginShape
     {
         public App()
         {
-            Device.SetFlags(new string[] { "Shapes_Experimental", "AppTheme_Experimental" });
+            Device.SetFlags(new string[] { "Shapes_Experimental", "AppTheme_Experimental", "IndicatorView_Experimental" });
 
             InitializeComponent();
 

@@ -3,9 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="LoginShape.MainPage"
-             BackgroundColor="{AppThemeBinding Dark=#222222, Light=#f1f1f1}"
-             >
+             xmlns:rainbows="clr-namespace:Xamarin.Forms.DebugRainbows;assembly=Xamarin.Forms.DebugRainbows"
+             xmlns:local="clr-namespace:LoginShape"
+             xmlns:t="clr-namespace:XamarinCommunityToolkit.Converters;assembly=XamarinCommunityToolkit"
+             rainbows:DebugRainbow.ShowColors="false"
+             rainbows:DebugRainbow.ShowGrid="false"
+             BackgroundColor="{AppThemeBinding Dark=#222222, Light=#f1f1f1}">
     <ContentPage.Resources>
+        <t:InvertedBoolConverter x:Key="InverseBool"/>
+
         <Style TargetType="Label">
             <Setter Property="TextColor"
                     Value="{AppThemeBinding Dark=#666666, Light=#222222}"/>
@@ -17,19 +23,45 @@
             <Setter Property="BackgroundColor"
                     Value="{AppThemeBinding Dark=#1d1d1d, Light=#F1F1F1}"/>
         </Style>
+        <DataTemplate x:Key="ActiveIndicatorTemplate">
+            <StackLayout Orientation="Horizontal">
+                <Ellipse Fill="#FF9900" />
+                <Line IsVisible="{TemplateBinding IsFinal, Converter={StaticResource InverseBool}}" />
+            </StackLayout>
+        </DataTemplate>
+        <DataTemplate x:Key="IndicatorTemplate">
+            <StackLayout Orientation="Horizontal">
+                <Ellipse />
+                <Line IsVisible="{TemplateBinding IsFinal, Converter={StaticResource InverseBool}}" />
+            </StackLayout>
+        </DataTemplate>
+
+        <local:IndicatorTemplateSelector x:Key="IndicatorTemplateSelector"
+                ActiveTemplate="{StaticResource ActiveIndicatorTemplate}"
+                DefaultTemplate="{StaticResource IndicatorTemplate}" />
     </ContentPage.Resources>
 
-    <Grid ColumnDefinitions="*,279,*"
-          RowDefinitions="*,350,*"
-          >
 
-        <Image
+    <Grid ColumnDefinitions="*,279,*" 
+          RowDefinitions="*,168,350,*">
+        <Ellipse
+            Grid.Row="1"
             Grid.Column="1"
             HorizontalOptions="Center"
-            VerticalOptions="End"
+            VerticalOptions="Center"
+            WidthRequest="168"
+            HeightRequest="168"
+            Stroke="#FFFF9900"
+            StrokeThickness="4"
+            Fill="White"/>
+        <Image
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
             WidthRequest="150"
             HeightRequest="150"
-            Margin="0,0,0,8"
+            
             Source="https://devblogs.microsoft.com/xamarin/wp-content/uploads/sites/44/2019/03/Screen-Shot-2017-01-03-at-3.35.53-PM-150x150.png">
             <Image.Clip>
                 <EllipseGeometry
@@ -39,8 +71,8 @@
             </Image.Clip>
         </Image>
 
-        <Grid Grid.Column="1" Grid.Row="1"
-              RowDefinitions="34,40,16,44,20,44,*"
+        <Grid Grid.Column="1" Grid.Row="2"
+              RowDefinitions="34,40,22,40,22,44,*"
               ColumnDefinitions="22,*,*,22"
               >
             <Path
@@ -113,10 +145,90 @@
             </Grid>
 
 
+        </Grid>
+
+        <Grid Grid.Column="1"
+              Grid.Row="3">
+            <Grid.Resources>
+                <Style TargetType="Ellipse">
+                    <Setter Property="Fill" Value="#33222222"/>
+                    <Setter Property="WidthRequest" Value="20"/>
+                    <Setter Property="HeightRequest" Value="20"/>
+                    <Setter Property="VerticalOptions" Value="Center"/>
+                </Style>
+                <Style TargetType="Line">
+                    <Setter Property="Stroke" Value="#33222222"/>
+                    <Setter Property="X2" Value="40"/>
+                    <Setter Property="VerticalOptions" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+
+            <!--<IndicatorView
+                IndicatorTemplate="{StaticResource IndicatorTemplateSelector}"
+                HorizontalOptions="Center">
+                <IndicatorView.ItemsSource>
+                    <x:Array Type="{x:Type local:OnboardingSteps}">
+                        <local:OnboardingSteps IsFinal="False"/>
+                        <local:OnboardingSteps IsFinal="False"/>
+                        <local:OnboardingSteps IsFinal="True"/>
+                    </x:Array>
+                </IndicatorView.ItemsSource>
+            </IndicatorView>-->
+
+            <IndicatorView
+                x:Name="Indicators"
+                IndicatorColor="Transparent"
+                SelectedIndicatorColor="Transparent"
+                HorizontalOptions="Center">
+                <IndicatorView.ItemsSource>
+                    <x:Array Type="{x:Type local:OnboardingSteps}">
+                        <local:OnboardingSteps IsFinal="False"/>
+                        <local:OnboardingSteps IsFinal="False"/>
+                        <local:OnboardingSteps IsFinal="True"/>
+                    </x:Array>
+                </IndicatorView.ItemsSource>
+                <IndicatorView.IndicatorTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <Ellipse  />
+                            <Label Text="{Binding IsFinal}"/>
+                            <Line
+                                IsVisible="{Binding IsFinal, Converter={StaticResource InverseBool}}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </IndicatorView.IndicatorTemplate>
+            </IndicatorView>
+
+            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+                <Ellipse Fill="#FF9900" />
+                <Line />
+                <Ellipse />
+                <Line />
+                <Ellipse />
+            </StackLayout>-->
 
         </Grid>
 
+        <!--<Grid Grid.Column="1"
+              Grid.ColumnSpan="2" Grid.Row="3"
+              Margin="0,0,-4,0"
+              WidthRequest="240"
+              HorizontalOptions="End">
+            
+            <Path Fill="#FF3300"
+                  Data="M 237.39,105.87 L 162.73,132.37 162.73,105.87 237.39,105.87 Z M 237.39,105.87" />
+            <Path Fill="#FF9900"
+                  Data="M 162.73,132.37 L 207.55,173 207.55,116.46 162.73,132.37 Z M 162.73,132.37" />
+            <Path Fill="#FF9900"
+                  Data="M 17.64,105.87 L 237.39,105.87 237.39,0.2 17.64,0.2 C 7.9,0.2 0,7.38 0,16.23 L 0,89.84 C 0,98.69 7.9,105.87 17.64,105.87 Z M 17.64,105.87" />
 
-        
+            <Label Text="Welcome to Shapes &amp; Paths, the coolest new feature in Xamarin.Forms 4.7."
+                   TextColor="#FF3300"
+                   FontFamily="DINBold"
+                   FontSize="22"
+                   Margin="15"
+                   />
+        </Grid>-->
+
     </Grid>
 </ContentPage>
