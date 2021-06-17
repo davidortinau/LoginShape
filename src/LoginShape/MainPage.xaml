@@ -7,8 +7,7 @@
              xmlns:local="clr-namespace:LoginShape"
              xmlns:t="clr-namespace:XamarinCommunityToolkit.Converters;assembly=XamarinCommunityToolkit"
              rainbows:DebugRainbow.ShowColors="false"
-             rainbows:DebugRainbow.ShowGrid="false"
-             BackgroundColor="{AppThemeBinding Dark=#222222, Light=#f1f1f1}">
+             rainbows:DebugRainbow.ShowGrid="false">
     <ContentPage.Resources>
         <t:InvertedBoolConverter x:Key="InverseBool"/>
 
@@ -147,7 +146,7 @@
 
         </Grid>
 
-        <Grid Grid.Column="1"
+        <!--<Grid Grid.Column="1"
               Grid.Row="3">
             <Grid.Resources>
                 <Style TargetType="Ellipse">
@@ -163,71 +162,14 @@
                 </Style>
             </Grid.Resources>
 
-            <!--<IndicatorView
-                IndicatorTemplate="{StaticResource IndicatorTemplateSelector}"
-                HorizontalOptions="Center">
-                <IndicatorView.ItemsSource>
-                    <x:Array Type="{x:Type local:OnboardingSteps}">
-                        <local:OnboardingSteps IsFinal="False"/>
-                        <local:OnboardingSteps IsFinal="False"/>
-                        <local:OnboardingSteps IsFinal="True"/>
-                    </x:Array>
-                </IndicatorView.ItemsSource>
-            </IndicatorView>-->
-
-            <IndicatorView
-                x:Name="Indicators"
-                IndicatorColor="Transparent"
-                SelectedIndicatorColor="Transparent"
-                HorizontalOptions="Center">
-                <IndicatorView.ItemsSource>
-                    <x:Array Type="{x:Type local:OnboardingSteps}">
-                        <local:OnboardingSteps IsFinal="False"/>
-                        <local:OnboardingSteps IsFinal="False"/>
-                        <local:OnboardingSteps IsFinal="True"/>
-                    </x:Array>
-                </IndicatorView.ItemsSource>
-                <IndicatorView.IndicatorTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal">
-                            <Ellipse  />
-                            <Label Text="{Binding IsFinal}"/>
-                            <Line
-                                IsVisible="{Binding IsFinal, Converter={StaticResource InverseBool}}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </IndicatorView.IndicatorTemplate>
-            </IndicatorView>
-
-            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" >
                 <Ellipse Fill="#FF9900" />
                 <Line />
                 <Ellipse />
                 <Line />
                 <Ellipse />
-            </StackLayout>-->
+            </StackLayout>
 
-        </Grid>
-
-        <!--<Grid Grid.Column="1"
-              Grid.ColumnSpan="2" Grid.Row="3"
-              Margin="0,0,-4,0"
-              WidthRequest="240"
-              HorizontalOptions="End">
-            
-            <Path Fill="#FF3300"
-                  Data="M 237.39,105.87 L 162.73,132.37 162.73,105.87 237.39,105.87 Z M 237.39,105.87" />
-            <Path Fill="#FF9900"
-                  Data="M 162.73,132.37 L 207.55,173 207.55,116.46 162.73,132.37 Z M 162.73,132.37" />
-            <Path Fill="#FF9900"
-                  Data="M 17.64,105.87 L 237.39,105.87 237.39,0.2 17.64,0.2 C 7.9,0.2 0,7.38 0,16.23 L 0,89.84 C 0,98.69 7.9,105.87 17.64,105.87 Z M 17.64,105.87" />
-
-            <Label Text="Welcome to Shapes &amp; Paths, the coolest new feature in Xamarin.Forms 4.7."
-                   TextColor="#FF3300"
-                   FontFamily="DINBold"
-                   FontSize="22"
-                   Margin="15"
-                   />
         </Grid>-->
 
     </Grid>
